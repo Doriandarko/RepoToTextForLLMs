@@ -47,4 +47,4 @@ Contributions to **RepoToTextForLLMs** are warmly welcomed. Whether it's through
 
 ## License
 
-This project is licensed under the MIT License - see the `LICENSE` file for details.
+This project is licensed under the MIT License.
