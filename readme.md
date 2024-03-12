@@ -36,7 +36,7 @@ GITHUB_TOKEN = os.getenv('GITHUB_TOKEN', 'YOUR TOKEN HERE')
 2. Execute the script in your terminal:
 
 ```bash
-python repototext.py
+python repototxt.py
 ```
 
 3. Enter the GitHub repository URL when prompted. The script will process the repository and output its findings, including the README, structure, and file contents (excluding binary files), accompanied by analysis prompts.
