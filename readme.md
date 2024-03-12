@@ -43,7 +43,7 @@ python repototxt.py
 
 ## Contributing
 
-Contributions to **RepoToTextForLLMs** are warmly welcomed. Whether it's through submitting pull requests, reporting issues, or suggesting improvements, your input helps make this tool better for everyone.
+Contributions to **RepoToTextForLLMs** are welcomed. Whether it's through submitting pull requests, reporting issues, or suggesting improvements, your input helps make this tool better for everyone.
 
 ## License
 
