@@ -1,6 +1,7 @@
 # RepoToTextForLLMs
+https://cdn.discordapp.com/attachments/1047006708813271100/1216931386032656445/im.jpeg
 
-**RepoToTextForLLMs** automates the analysis of GitHub repositories specifically tailored for usage with large context LLMs. This Python script efficiently fetches README files, repository structure, and non-binary file contents. Additionally, it provides structured outputs complete with pre-formatted prompts to guide further analysis of the repository's content.
+Automates the analysis of GitHub repositories specifically tailored for usage with large context LLMs. This Python script efficiently fetches README files, repository structure, and non-binary file contents. Additionally, it provides structured outputs complete with pre-formatted prompts to guide further analysis of the repository's content.
 
 ## Features
 
