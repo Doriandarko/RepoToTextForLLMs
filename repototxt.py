@@ -58,7 +58,7 @@ def get_file_contents_iteratively(repo):
         '.pyc', '.pyo', '.pyd', '.egg', '.whl',
         # Other potentially important extensions
         '.deb', '.rpm', '.apk', '.msi', '.dmg', '.pkg', '.bin', '.dat', '.data',
-        '.dump', '.img', '.toast', '.vcd', '.crx', '.xpi',
+        '.dump', '.img', '.toast', '.vcd', '.crx', '.xpi', '.lockb', 'package-lock.json', '.svg' ,
         '.eot', '.otf', '.ttf', '.woff', '.woff2',
         '.ico', '.icns', '.cur',
         '.cab', '.dmp', '.msp', '.msm',
