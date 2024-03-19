@@ -1,0 +1,6 @@
+{
+  "method" : "l",
+  "method_annotation" : "possible methods: local, remote or l/r",
+  "repo_path": "/Users/oor8ieu/git/private_project/private_repo/my_services/local-api",
+  "repo_path_annotation" : "path to the repository url or absolute path to the local directory"
+}
