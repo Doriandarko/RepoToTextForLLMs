@@ -2,6 +2,7 @@ import os
 from github import Github
 from tqdm import tqdm
 from dotenv import load_dotenv
+import json
 
 load_dotenv()  # Load variables from .env file
 
@@ -147,7 +148,6 @@ def get_repo_contents(repo_url):
     Main function to get repository contents.
     """
     repo_name = repo_url.split('/')[-1]
-    print(repo_name)
     if not GITHUB_TOKEN:
         raise ValueError("Please set the 'GITHUB_TOKEN' environment variable or the 'GITHUB_TOKEN' in the script.")
     g = Github(GITHUB_TOKEN)
@@ -216,30 +216,50 @@ def get_prompt(prompt_path):
         return f.read()
 
 
-if __name__ == '__main__':
+def init(config_path):
+    filename_opened = open(config_path, mode='r')
 
-    # possible values: "local", "remote"
-    method = input("Please enter the method to use (local/remote or l/r): ")
-    # method = "local"
+    j = {}
+    j = json.load(filename_opened)
+
+    filename_opened.close()
+    return j
+
+
+if __name__ == '__main__':
+    try:
+        # config variable from config.json
+        config = init("config.json")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        print("Please check the config file and try again.")
+        exit()
+
+    try:
+        method = config["method"]
+        repo_path_or_url = config["repo_path"]
+    except KeyError as ke:
+        print(f"Error: The key '{ke}' is missing in the config file.")
+        print("Please check the config file and try again.")
+        exit()
 
     if method == "local" or method == "l":
-        local_path = input("Please enter the path to the local directory: ")
-        # local_path = "/Users/oor8ieu/git/private_project/private_repo/my_services/local-api"
-        repo_name = local_path.split('/')[-1]
-        binary_extensions = get_binary_extensions()
-        analysis_result = analyze_local_repo(local_path, binary_extensions)
-        output_filename = f"{repo_name}_contents.txt"
-        prompt = get_prompt("prompt.txt")
-        analysis_result = (prompt + analysis_result).replace("##REPO_NAME##", repo_name)
-        with open(output_filename, 'w', encoding='utf-8') as f:
-            f.write(analysis_result)
-        print(f"Local repository contents saved to '{output_filename}'.")
-    elif method == "remote" or method == "r":
-        # repo_url = input("Please enter the GitHub repository URL: ")
-        # repo_url = "https://github.com/mariza1991/ugarovy_private"
-        repo_url = "https://github.com/Doriandarko/RepoToTextForLLMs"
         try:
-            repo_name, instructions, readme_content, repo_structure, file_contents = get_repo_contents(repo_url)
+            repo_name = repo_path_or_url.split('/')[-1]
+            binary_extensions = get_binary_extensions()
+            analysis_result = analyze_local_repo(repo_path_or_url, binary_extensions)
+            output_filename = f"{repo_name}_contents.txt"
+            prompt = get_prompt("prompt.txt")
+            analysis_result = (prompt + analysis_result).replace("##REPO_NAME##", repo_name)
+            with open(output_filename, 'w', encoding='utf-8') as f:
+                f.write(analysis_result)
+            print(f"Local repository contents saved to '{output_filename}'.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            print("Please check the repository path and try again.")
+    elif method == "remote" or method == "r":
+        try:
+            repo_name, instructions, readme_content, repo_structure, file_contents = get_repo_contents(repo_path_or_url)
             output_filename = f'{repo_name}_contents.txt'
             with open(output_filename, 'w', encoding='utf-8') as f:
                 f.write(instructions)
